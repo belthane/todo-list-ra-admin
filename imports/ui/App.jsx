@@ -2,15 +2,15 @@ import { Meteor } from 'meteor/meteor';
 import React, { useState, Fragment } from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
 import { TasksCollection } from '/imports/db/TasksCollection';
-import { Admin, Resource, ListGuesser } from "react-admin";
-// import Dashboard from "./pages/Dashboard";
-import meteorProvider from "../modules/meteorProvider";
-import authProvider from "../modules/authProvider";
+import { Admin, Resource, ListGuesser } from 'react-admin';
+import Dashboard from './pages/Dashboard';
+import meteorProvider from '../modules/meteorProvider';
+import authProvider from '../modules/authProvider';
 import { createBrowserHistory as createHistory } from 'history';
 import { TasksList } from './lists/tasks';
 import { UsersList } from './lists/tasks';
-// import customRoutes from './customRoutes';
-import { Home } from "./pages/Home"
+import customRoutes from './customRoutes';
+import { Home } from './pages/Home';
 
 const history = createHistory();
 
@@ -52,16 +52,17 @@ export const App = () => {
     return { tasks, pendingTasksCount };
   });
 
-  const pendingTasksTitle = `${pendingTasksCount ? ` (${pendingTasksCount})` : ''
-    }`;
+  const pendingTasksTitle = `${
+    pendingTasksCount ? ` (${pendingTasksCount})` : ''
+  }`;
 
   const logout = () => Meteor.logout();
 
   return (
-    <div className="app">
+    <div className='app'>
       <header>
-        <div className="app-bar">
-          <div className="app-header">
+        <div className='app-bar'>
+          <div className='app-header'>
             <h1>
               📝️ To Do List
               {pendingTasksTitle}
@@ -70,28 +71,18 @@ export const App = () => {
         </div>
       </header>
 
-      <div className="main">
-
+      <div className='main'>
         <Admin
-
-          // customRoutes={customRoutes}
-
-          // dashboard={Dashboard}
-
+          //customRoutes={customRoutes}
+          dashboard={Dashboard}
           dataProvider={meteorProvider}
-
           authProvider={authProvider}
-
           history={history}
-
         >
-
-          {/* <Resource name="users" list={UsersList} /> */}
-          <Resource name="tasks" list={TasksList} />
-
+          <Resource name='users' list={UsersList} />
+          <Resource name='tasks' list={TasksList} />
         </Admin>
-
       </div>
-    </div >
+    </div>
   );
 };

@@ -1,5 +1,5 @@
-import { Meteor } from "meteor/meteor";
-import { Roles } from "meteor/alanning:roles";
+import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
 
 const authProvider = {
   login: ({ username, password }) => {
@@ -15,40 +15,40 @@ const authProvider = {
           //   Meteor.logout();
           //   return reject(new Error('Login forbidden'));
           // }
-          console.log("LOGIN accepted");
+          console.log('LOGIN accepted');
           resolve();
         }
       });
     });
   },
-  logout: params => { 
+  logout: (params) => {
     return new Promise((resolve, reject) => {
-      Meteor.logout(err => {
-        if (err) { 
-          console.log("ERROR on logout", err);
+      Meteor.logout((err) => {
+        if (err) {
+          console.log('ERROR on logout', err);
           reject(err);
         }
-        console.log("LOGOUT");
+        console.log('LOGOUT');
         resolve();
       });
     });
   },
-  checkAuth: params => {
-    console.log("checkAuth", params, Meteor.user());
+  checkAuth: (params) => {
+    console.log('checkAuth', params, Meteor.user());
     const userId = Meteor.userId();
     if (!userId) return Promise.reject({ redirectTo: '/login' });
     // if (!Roles.userIsInRole(userId, "admin")) return Promise.reject();
     return Promise.resolve();
   },
-  checkError: error => {
-    console.log("checkError", error);
-    return Promise.resolve()
+  checkError: (error) => {
+    console.log('checkError', error);
+    return Promise.resolve();
   },
-  getPermissions: params => {
+  getPermissions: (params) => {
     const userId = Meteor.userId();
     if (!userId) return Promise.reject();
     const roles = Roles.getRolesForUser(userId);
-    console.log("getPermissions", roles);
+    console.log('getPermissions', roles);
     return roles ? Promise.resolve(roles) : Promise.reject();
   },
 };
