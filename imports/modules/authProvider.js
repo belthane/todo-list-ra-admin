@@ -34,21 +34,21 @@ const authProvider = {
     });
   },
   checkAuth: (params) => {
-    console.log('checkAuth', params, Meteor.user());
+    console.log('authProvider checkAuth', params, Meteor.user());
     const userId = Meteor.userId();
     if (!userId) return Promise.reject({ redirectTo: '/login' });
     // if (!Roles.userIsInRole(userId, "admin")) return Promise.reject();
     return Promise.resolve();
   },
   checkError: (error) => {
-    console.log('checkError', error);
+    console.log('authProvider checkError', error);
     return Promise.resolve();
   },
   getPermissions: (params) => {
     const userId = Meteor.userId();
     if (!userId) return Promise.reject();
     const roles = Roles.getRolesForUser(userId);
-    console.log('getPermissions', roles);
+    console.log('authProvider getPermissions', roles);
     return roles ? Promise.resolve(roles) : Promise.reject();
   },
 };

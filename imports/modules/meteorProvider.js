@@ -9,7 +9,7 @@ const propForElemMatch = 'userid';
 
 export default {
   getList: (resource, params) => {
-    console.log('DEBUG getList params ', resource, params);
+    console.log('meteorProvider DEBUG getList params ', resource, params);
     const { page, perPage } = params.pagination;
     const { field, order } = params.sort;
     const { filter } = params;
@@ -34,14 +34,18 @@ export default {
     }
     const collection = getCollectionByName(resource);
     console.log('meteorProvider:', collection);
-    const total = collection.find(filter ? refactorFilter : {}).count();
+    // const total = collection.find(filter ? refactorFilter : {}).count();
+    const total = collection.find({}).count();
+    console.log("DEBUG total", total);
     const getList = collection
-      .find(filter ? refactorFilter : {}, {
+      // .find(filter ? refactorFilter : {}, {
+        .find({}, {
         sort,
         limit: perPage,
         skip,
       })
       .fetch();
+      console.log("DEBUG getList", getList);
     return Promise.resolve({
       data: getList.map((res) => ({ ...res, id: res._id })),
       total,
@@ -49,7 +53,7 @@ export default {
   },
 
   getOne: (resource, params) => {
-    console.log('DEBUG getOne params ', resource, params);
+    console.log('meteorProvider DEBUG getOne params ', resource, params);
     const { id } = params;
     const collection = getCollectionByName(resource);
     const getOne = collection.findOne({ _id: id });
@@ -59,7 +63,7 @@ export default {
   },
 
   getMany: (resource, params) => {
-    console.log('DEBUG getMany params ', resource, params);
+    console.log('meteorProvider DEBUG getMany params ', resource, params);
     const { ids } = params;
     const collection = getCollectionByName(resource);
     const getList = collection.find({ _id: { $in: ids } }).fetch();
@@ -69,7 +73,7 @@ export default {
   },
 
   getManyReference: (resource, params) => {
-    console.log('DEBUG getManyReferencence params ', resource, params);
+    console.log('meteorProvider DEBUG getManyReferencence params ', resource, params);
     const { page, perPage } = params.pagination;
     const { field, order } = params.sort;
     const { target, id, filter } = params;
@@ -82,7 +86,7 @@ export default {
       [target]: id,
       ...filter,
     };
-    console.log('DEBUG getManyReferencence query: ', query);
+    console.log('meteorProvider DEBUG getManyReferencence query: ', query);
     const total = collection.find(query).count();
     const getList = collection
       .find(query, {
@@ -98,17 +102,17 @@ export default {
   },
 
   update: (resource, params) => {
-    console.log('DEBUG update params ', resource, params);
+    console.log('meteorProvider DEBUG update params ', resource, params);
     return { data: null };
   },
 
   updateMany: (resource, params) => {
-    console.log('DEBUG updateMany params ', resource, params);
+    console.log('meteorProvider DEBUG updateMany params ', resource, params);
     return { data: null };
   },
 
   create: (resource, params) => {
-    console.log('DEBUG create params ', resource, params);
+    console.log('meteorProvider DEBUG create params ', resource, params);
     const { data } = params;
     const collection = getCollectionByName(resource);
     const createdId = collection.insert({ data });
@@ -118,7 +122,7 @@ export default {
   },
 
   delete: (resource, params) => {
-    console.log('DEBUG delete params ', resource, params);
+    console.log('meteorProvider DEBUG delete params ', resource, params);
     const { id } = params;
     const collection = getCollectionByName(resource);
     if (resource === 'users') {
@@ -132,7 +136,7 @@ export default {
   },
 
   deleteMany: (resource, params) => {
-    console.log('DEBUG deleteMany params ', resource, params);
+    console.log('meteorProvider DEBUG deleteMany params ', resource, params);
     const { ids } = params;
     const collection = getCollectionByName(resource);
     _.each(ids, (id) => {

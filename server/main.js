@@ -1,8 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
-import { TasksCollection } from '/imports/db/TasksCollection';
-import '/imports/api/tasksMethods';
-import '/imports/api/tasksPublications';
+import { TasksCollection } from '../imports/api/Tasks/TasksCollection';
+import '../imports/startup/server';
 
 const insertTask = (taskText, user) =>
   TasksCollection.insert({
@@ -21,6 +20,7 @@ Meteor.startup(() => {
       password: SEED_PASSWORD,
     });
   }
+
 
   const user = Accounts.findUserByUsername(SEED_USERNAME);
 

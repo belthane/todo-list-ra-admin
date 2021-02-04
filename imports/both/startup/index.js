@@ -1,3 +1,3 @@
 import './collections';
+import '../../api/Tasks/TasksCollection';
 
-export default collections;

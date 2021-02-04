@@ -8,7 +8,7 @@ const Dashboard = () => {
   //   <Title title="Welcome to the administration" />
   //   <CardContent>Lorem ipsum sic dolor amet...</CardContent>
   // </Card>
-  return <h1>Admin Dashboard</h1>;
+  return <h1>Admin Dashboard v1</h1>;
 };
 
 export default Dashboard;

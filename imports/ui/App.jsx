@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React, { useState, Fragment } from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
-import { TasksCollection } from '/imports/db/TasksCollection';
+import { TasksCollection } from '../api/Tasks/TasksCollection';
 import { Admin, Resource, ListGuesser } from 'react-admin';
 import Dashboard from './pages/Dashboard';
 import meteorProvider from '../modules/meteorProvider';
@@ -10,7 +10,7 @@ import { createBrowserHistory as createHistory } from 'history';
 import { TasksList } from './lists/tasks';
 import { UsersList } from './lists/tasks';
 import customRoutes from './customRoutes';
-import { Home } from './pages/Home';
+// import { Home } from './pages/Home';
 
 const history = createHistory();
 
@@ -74,13 +74,13 @@ export const App = () => {
       <div className='main'>
         <Admin
           //customRoutes={customRoutes}
-          dashboard={Dashboard}
+          // dashboard={Dashboard}
           dataProvider={meteorProvider}
           authProvider={authProvider}
           history={history}
         >
-          <Resource name='users' list={UsersList} />
-          <Resource name='tasks' list={TasksList} />
+          <Resource name='users' options={{ label: 'users' }} list={UsersList} />
+          <Resource name='tasks' options={{ label: 'tasks' }} list={TasksList} />
         </Admin>
       </div>
     </div>

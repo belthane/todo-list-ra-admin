@@ -2,6 +2,7 @@ import { CollectionExtensions } from "meteor/lai:collection-extensions";
 
 let registered_collections = {};
 CollectionExtensions.addExtension(function(name, options) {
+  console.log('collections.addExtension', name);
   registered_collections[name] = {
     name: name,
     instance: this,
