@@ -7,8 +7,8 @@ import { App } from '../imports/ui/App';
 
 Meteor.startup(() => {
 
-    const sub1 = Meteor.subscribe("tasks");
-    console.log("client main: ", sub1)
+    Meteor.subscribe("tasks");
+    Meteor.subscribe("users");
     render(<App/>, document.getElementById('react-target'));
 
 });
