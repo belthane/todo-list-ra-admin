@@ -5,7 +5,7 @@ import meteorProvider from '../modules/meteorProvider';
 import authProvider from '../modules/authProvider';
 import { createBrowserHistory as createHistory } from 'history';
 import { TasksList } from './lists/tasks';
-import { UsersList } from './lists/tasks';
+import { UsersList } from './lists/users';
 import customRoutes from './customRoutes';
 
 const history = createHistory();
