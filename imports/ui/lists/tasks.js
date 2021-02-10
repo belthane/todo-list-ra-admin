@@ -1,8 +1,17 @@
 import * as React from "react";
-import { List, Datagrid, TextField, DateField, BooleanField } from 'react-admin';
+import { List, Datagrid, TextField, DateField, BooleanField, Filter, TextInput } from 'react-admin';
+
+const TasksFilter = (props) => {
+    // console.log('TasksFilter:', props);
+    return (
+        <Filter {...props}>
+            <TextInput label="Search" source="text" alwaysOn />
+        </Filter>
+    );
+};
 
 export const TasksList = (props) => (
-    <List {...props}>
+    <List filters={<TasksFilter />} {...props}>
         <Datagrid>
             <TextField source="id" />
             <TextField source="text" />
