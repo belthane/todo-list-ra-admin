@@ -3,7 +3,7 @@ import _ from 'underscore';
 
 import { getCollectionByName } from '../both/startup/collections';
 
-const propsForRegExp = ['username', 'userId'];
+const propsForRegExp = ['text'];
 const propsArraysForElemMatch = ['followedBy', 'following', 'blocked'];
 const propForElemMatch = 'userid';
 
@@ -34,18 +34,18 @@ export default {
     }
     const collection = getCollectionByName(resource);
     console.log('meteorProvider:', collection);
-    // const total = collection.find(filter ? refactorFilter : {}).count();
-    const total = collection.find({}).count();
-    console.log("DEBUG total", total);
+    const total = collection.find(filter ? refactorFilter : {}).count();
+    // const total = collection.find({}).count();
+    console.log('DEBUG total', total);
     const getList = collection
-      // .find(filter ? refactorFilter : {}, {
-        .find({}, {
+      .find(filter ? refactorFilter : {}, {
+        // .find({}, {
         sort,
         limit: perPage,
         skip,
       })
       .fetch();
-      console.log("DEBUG getList", getList);
+    console.log('DEBUG getList', getList);
     return Promise.resolve({
       data: getList.map((res) => ({ ...res, id: res._id })),
       total,
@@ -73,7 +73,11 @@ export default {
   },
 
   getManyReference: (resource, params) => {
-    console.log('meteorProvider DEBUG getManyReferencence params ', resource, params);
+    console.log(
+      'meteorProvider DEBUG getManyReferencence params ',
+      resource,
+      params
+    );
     const { page, perPage } = params.pagination;
     const { field, order } = params.sort;
     const { target, id, filter } = params;
@@ -105,8 +109,8 @@ export default {
     console.log('meteorProvider DEBUG update params ', resource, params);
     const { data } = params;
     const collection = getCollectionByName(resource);
-    return Promise.resolve({ 
-      data: null
+    return Promise.resolve({
+      data: null,
     });
   },
 
