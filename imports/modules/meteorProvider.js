@@ -103,7 +103,11 @@ export default {
 
   update: (resource, params) => {
     console.log('meteorProvider DEBUG update params ', resource, params);
-    return { data: null };
+    const { data } = params;
+    const collection = getCollectionByName(resource);
+    return Promise.resolve({ 
+      data: null
+    });
   },
 
   updateMany: (resource, params) => {

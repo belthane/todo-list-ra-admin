@@ -1,5 +1,5 @@
 import React from 'react';
-import { Admin, Resource } from 'react-admin';
+import { Admin, Resource, EditGuesser } from 'react-admin';
 import Dashboard from './pages/Dashboard';
 import meteorProvider from '../modules/meteorProvider';
 import authProvider from '../modules/authProvider';
@@ -27,8 +27,8 @@ export const App = () => {
           authProvider={authProvider}
           history={history}
         >
-          <Resource name='tasks' options={{ label: 'tasks' }} list={TasksList} icon={AssignmentIcon} />
-          <Resource name='users' options={{ label: 'users' }} list={UsersList} icon={UserIcon} />
+          <Resource name='tasks' options={{ label: 'Tasks' }} list={TasksList} icon={AssignmentIcon} edit={EditGuesser} />
+          <Resource name='users' options={{ label: 'Users' }} list={UsersList} icon={UserIcon} />
         </Admin>
       </div>
     </StylesProvider>
