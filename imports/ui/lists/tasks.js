@@ -5,14 +5,36 @@ import {
     TextField,
     DateField,
     BooleanField,
+    SelectField,
     Filter,
     SearchInput,
     ReferenceField,
-    EditButton
+    EditButton,
+    useListContext,
 } from 'react-admin';
 
+const Aside = () => {
+    const { selectedIds } = useListContext();
+    console.log("Aside selectedIds:", selectedIds);
+    const taskDetailsId = selectedIds.find(e => e);
+    console.log("Aside taskDetailsId:", taskDetailsId);
+    console.log(`${taskDetailsId}`);
+    return (
+        <div style={{ width: 200, margin: '1em' }}>
+            <h5>
+                Task details
+            </h5>
+            <SelectField 
+            source="text" 
+            choices={[
+                { id: `${taskDetailsId}` }
+            ]} />
+        </div>
+    );
+};
+
 const TasksFilter = (props) => {
-    // console.log('TasksFilter:', props);
+    console.log('TasksFilter:', props);
     return (
         <Filter {...props}>
             <SearchInput
@@ -25,6 +47,7 @@ const TasksFilter = (props) => {
 
 export const TasksList = (props) => (
     <List {...props}
+        aside={<Aside />}
         filters={<TasksFilter />}
         sort={{ field: 'createdAt', order: 'DESC' }}
         title="List of tasks"
@@ -43,13 +66,3 @@ export const TasksList = (props) => (
     </List>
 );
 
-{/* <ReferenceInput
-      label="Username"
-      source="userId"
-      reference="users"
-      filterToQuery={searchText => ({ username: searchText })}
-      alwaysOn
-      allowEmpty
-    >
-      <AutocompleteInput optionText={choice => `${choice.username}`} />
-    </ReferenceInput> */}

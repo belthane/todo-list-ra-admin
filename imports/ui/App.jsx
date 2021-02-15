@@ -6,6 +6,7 @@ import authProvider from '../modules/authProvider';
 import { createBrowserHistory as createHistory } from 'history';
 import { TasksList } from './lists/tasks';
 import { UsersList } from './lists/users';
+import { TasksEdit } from './edits/tasks';
 import customRoutes from './customRoutes';
 import { StylesProvider } from "@material-ui/core/styles";
 import AssignmentIcon from '@material-ui/icons/Assignment';
@@ -27,7 +28,7 @@ export const App = () => {
           authProvider={authProvider}
           history={history}
         >
-          <Resource name='tasks' options={{ label: 'Tasks' }} list={TasksList} icon={AssignmentIcon} edit={EditGuesser} />
+          <Resource name='tasks' options={{ label: 'Tasks' }} list={TasksList} icon={AssignmentIcon} edit={TasksEdit} />
           <Resource name='users' options={{ label: 'Users' }} list={UsersList} icon={UserIcon} />
         </Admin>
       </div>

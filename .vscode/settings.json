@@ -1,0 +1,11 @@
+{
+  "editor.tabSize": 2,
+  "emmet.triggerExpansionOnTab": true,
+  "emmet.excludeLanguages": [
+    "markdown"
+  ],
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+},
+"editor.minimap.maxColumn": 80
+}
