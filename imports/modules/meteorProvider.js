@@ -10,6 +10,13 @@ const propForElemMatch = 'userid';
 export default {
   getList: (resource, params) => {
     console.log('meteorProvider DEBUG getList params ', resource, params);
+    if (resource === 's') {
+      console.log('meteorProvider DEBUG getList resource s !');
+      return Promise.resolve({
+        data: [],
+        total: 0,
+      });
+    }
     const { page, perPage } = params.pagination;
     const { field, order } = params.sort;
     const { filter } = params;
@@ -64,6 +71,13 @@ export default {
 
   getMany: (resource, params) => {
     console.log('meteorProvider DEBUG getMany params ', resource, params);
+    if (resource === 's') {
+      console.log('meteorProvider DEBUG getMany resource s !');
+      return Promise.resolve({
+        data: [],
+        total: 0,
+      });
+    }
     const { ids } = params;
     const collection = getCollectionByName(resource);
     const getList = collection.find({ _id: { $in: ids } }).fetch();
@@ -109,14 +123,36 @@ export default {
     console.log('meteorProvider DEBUG update params ', resource, params);
     const { data } = params;
     const collection = getCollectionByName(resource);
+    if (resource === 'users') {
+      console.log('TODO users');
+    } else {
+      collection.update(
+        { _id: data._id },
+        { $set: { text: data.text, isChecked: data.isChecked } }
+      );
+    }
     return Promise.resolve({
-      data: null,
+      data: { ...data, id: data._id },
     });
   },
 
   updateMany: (resource, params) => {
     console.log('meteorProvider DEBUG updateMany params ', resource, params);
-    return { data: null };
+    const { ids } = params;
+    const collection = getCollectionByName(resource);
+    _.each(ids, (id) => {
+      if (resource === 'users') {
+        console.log('TODO users');
+      } else {
+        collection.update(
+          { _id: data._id },
+          { $set: { text: data.text, isChecked: data.isChecked } }
+        );
+      }
+    });
+    return Promise.resolve({
+      data: ids,
+    });
   },
 
   create: (resource, params) => {
