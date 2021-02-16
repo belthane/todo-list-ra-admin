@@ -5,32 +5,38 @@ import {
     TextField,
     DateField,
     BooleanField,
-    SelectField,
     Filter,
     SearchInput,
     ReferenceField,
     EditButton,
     useListContext,
+    useGetOne,
 } from 'react-admin';
+
+
 
 const Aside = () => {
     const { selectedIds } = useListContext();
     console.log("Aside selectedIds:", selectedIds);
     const taskDetailsId = selectedIds.find(e => e);
     console.log("Aside taskDetailsId:", taskDetailsId);
-    console.log(`${taskDetailsId}`);
-    return (
-        <div style={{ width: 200, margin: '1em' }}>
-            <h5>
-                Task details
+    
+    if (taskDetailsId !== undefined) {
+     const { data } = useGetOne('tasks', taskDetailsId);
+     console.log("Details:", data);
+        return (
+            <div style={{ width: 200, margin: '1em' }}>
+                <h5>
+                    Task details
             </h5>
-            <SelectField 
-            source="text" 
-            choices={[
-                { id: `${taskDetailsId}` }
-            ]} />
-        </div>
-    );
+                <p>Content: {data.text}</p>
+                <p>Is checked: {data.isChecked ? "true" : "false"}</p>
+            </div>
+        );
+    }
+    else {
+        return(null);
+    };
 };
 
 const TasksFilter = (props) => {

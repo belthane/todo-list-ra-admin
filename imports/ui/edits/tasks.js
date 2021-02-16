@@ -6,6 +6,7 @@ import {
   TextField,
   DateField,
   BooleanField,
+  BooleanInput,
   TextInput,
   ReferenceManyField
 } from 'react-admin';
@@ -26,7 +27,7 @@ export const TasksEdit = (props) => {
           </Datagrid>
         </ReferenceManyField>
         <TextInput label="Text to be edited" source="text" />
-        <BooleanField label="isChecked" source="isChecked" />
+        <BooleanInput label="isChecked" source="isChecked" />
       </SimpleForm>
     </Edit>
   );
