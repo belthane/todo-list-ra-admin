@@ -11,8 +11,8 @@ import {
   ReferenceManyField
 } from 'react-admin';
 
+
 export const TasksEdit = (props) => {
-  console.log("TasksEdit:", props)
   return (
     <Edit {...props}
       title="Edit task"
